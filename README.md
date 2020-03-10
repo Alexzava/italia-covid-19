@@ -4,7 +4,7 @@ Questo progetto fornisce una rappresentazione grafica dei vari dati nazionali e 
 al nuovo corona virus (COVID-19).
 
 ## AVVISO
-Il progetto è in fase di sviluppo (BETA), potrebbe subire modifiche giornaliere.
+Il progetto è in fase di sviluppo, potrebbe subire modifiche giornaliere.
 
 ## TODO
 * Documentazione
