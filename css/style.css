@@ -1,0 +1,43 @@
+body {
+	background-color: #212121;
+	color: #FFF;
+}
+canvas {
+	background: #212121;
+	border: 1px solid rgba(255,255,255,0.5);
+}
+h1, h4 {
+	text-transform: uppercase;
+}
+h1 {
+	font-size: 2em;
+}
+a, a:hover {
+	color: #FFF;
+}
+.red {
+	color: #FF0000;
+}
+.navbar-dark .navbar-nav .nav-link {
+	color: rgba(255,255,255, 1);
+}
+.icon-box {
+	text-align: right;
+	padding-left: 0;
+	padding-right: 0;
+}
+.col-md-6 {
+	margin-bottom: 20px;
+}
+#secondContainer {
+	display: none;
+}
+footer {
+	margin-bottom: 3px;
+}
+.special-link, .special-link:visited {
+	color: #2196f3;
+}
+.special-link:hover {
+	text-decoration: underline;
+}

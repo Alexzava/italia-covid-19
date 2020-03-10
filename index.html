@@ -1,1 +1,152 @@
-<h1>This is a test</h1>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Dati a livello nazionale e regionale riguardo alla diffusione del nuovo corona virus (COVID-19)">
+        <meta name="keywords" content="corona virus, covid-19, italia, nazione, regioni, 2020, alexzava">
+
+		<title>ITALIA COVID-19</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+		<!-- Google Material Icons -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="css/style.css">
+
+		<!-- Bootstrap js -->
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+		<!-- Chart and CSV js -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.1"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+		<!-- Custom JS -->
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/regioni.js"></script>
+		<script type="text/javascript" src="js/dataset.js"></script>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212121;">
+				<a class="navbar-brand" href="index.html">ITALIA <span class="red">COVID-19</span></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Dati nazionali</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Dati regionali
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown" id="listaRegioni">
+								<!--<a class="dropdown-item" href="#">Action</a>-->
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<div class="container-fluid" id="mainContainer">
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>Il progetto è in fase di sviluppo</strong>. 
+				A breve verranno aggiunte nuove funzionalità
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="col-md-12 text-center">
+					<h1 id="titoloPagina">...</h1>
+				</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="totale_casi"></canvas>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="totale_attualmente_positivi"></canvas>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="deceduti"></canvas>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="tamponi"></canvas>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="totale_ospedalizzati"></canvas>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="dimessi_guariti"></canvas>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="ricoverati_con_sintomi"></canvas>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="terapia_intensiva"></canvas>
+				</div>
+				<!--<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="nuovi_attualmente_positivi"></canvas>
+				</div>-->
+				<div class="col-md-6">
+					<div class="col-md-12 icon-box">
+						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
+						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
+					</div>
+					<canvas id="isolamento_domiciliare"></canvas>
+				</div>
+			</div>
+		</div>
+
+		<footer class="container-fluid">
+			Sviluppato da <a href="https://alexzava.com" class="special-link" target="_blank">Alex Zava</a>.
+			<br>
+			<a href="https://github.com/pcm-dpc/COVID-19" class="special-link" target="_blank">Dataset</a> del 
+			<a href="http://www.protezionecivile.it/home" class="special-link" target="_blank">Dipartimento della Protezione Civile</a>.<br>
+			<br>
+		</footer>
+	</body>
+</html>
