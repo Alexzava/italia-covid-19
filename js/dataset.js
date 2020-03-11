@@ -128,6 +128,16 @@ function datasetsParametro(data, parametro, label, color) {
 	};
 }
 
+// Restituisce il valore più recente di un parametro
+// data => dataset convertito (vedi datasetConversion())
+// parametro => string
+// return valore del parametro (string)
+function datasetGetLastValue(data, parametro) {
+	data = sliceDataset(data, data.length-1, data.length);
+	var giorno = Object.keys(data[0])[0];
+	return data[0][giorno][parametro];
+}
+
 // Disegna il grafico con il dataset fornito
 // chartID => id canvas
 // data => dataset converito (vedi datasetConversion() e datasetsParametro())

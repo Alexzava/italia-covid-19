@@ -6,7 +6,7 @@ canvas {
 	background: #212121;
 	border: 1px solid rgba(255,255,255,0.5);
 }
-h1, h4 {
+h1, h4, h5 {
 	text-transform: uppercase;
 }
 h1 {
@@ -26,18 +26,35 @@ a, a:hover {
 	padding-left: 0;
 	padding-right: 0;
 }
-.col-md-6 {
-	margin-bottom: 20px;
-}
 #secondContainer {
 	display: none;
 }
 footer {
-	margin-bottom: 3px;
+	margin-bottom: 5px;
 }
 .special-link, .special-link:visited {
 	color: #2196f3;
 }
 .special-link:hover {
 	text-decoration: underline;
+}
+.single-box {
+	margin: 0 auto;
+	text-align: center;
+}
+.single-box>p {
+	margin: 0;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.single-box>h5 {
+	font-size: 1em;
+	font-weight: bold;
+}
+.mb-20 {
+	margin-bottom: 20px;
+}
+.mb-30 {
+	margin-bottom: 30px;
 }

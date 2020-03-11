@@ -64,60 +64,86 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="col-md-12 text-center">
-					<h1 id="titoloPagina">...</h1>
+			<div class="col-md-12 text-center mb-30">
+				<h1 id="titoloPagina">...</h1>
+			</div>
+			<div class="row mb-30">
+				<div class="col-md-3">
+					<div class="col-md-8 single-box">
+						<h5>Casi totali</h5>
+						<p id="box_totale_casi" style="color: #ff0000;">0</p>
+					</div>
 				</div>
-			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-3">
+					<div class="col-md-8 single-box">
+						<h5>Attualmente positivi</h5>
+						<p id="box_totale_attualmente_positivi" style="color: #00FF00;">0</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="col-md-8 single-box">
+						<h5>Deceduti</h5>
+						<p id="box_deceduti" style="color: #2196F3;">0</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="col-md-8 single-box">
+						<h5>Totale ospedalizzati</h5>
+						<p id="box_totale_ospedalizzati" style="color: #FF8F00;">0</p>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-30">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
 					</div>
 					<canvas id="totale_casi"></canvas>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
 					</div>
 					<canvas id="totale_attualmente_positivi"></canvas>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
 					</div>
 					<canvas id="deceduti"></canvas>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
 					</div>
 					<canvas id="tamponi"></canvas>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
 					</div>
 					<canvas id="totale_ospedalizzati"></canvas>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
 					</div>
 					<canvas id="dimessi_guariti"></canvas>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>
 					</div>
 					<canvas id="ricoverati_con_sintomi"></canvas>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
 						<a href="javascript:void(0)" onclick="zoomChart(this)"><i class="material-icons">aspect_ratio</i></a>
 						<a href="javascript:void(0)" onclick="hideChart(this);"><i class="material-icons">close</i></a>

@@ -56,10 +56,12 @@ window.onload = function() {
 		initDatiRegionali(function() {
 			var datiRegione = filterRegione(datiRegionali, searchParams.get("regione"));
 			createChart(datiRegione, "Dati regione " + searchParams.get("regione"));
+			setBoxes(datiRegione);
 		});
 	} else {
 		initDatiNazionali(function() {
 			createChart(datiNazionali, "Dati nazionali");
+			setBoxes(datiNazionali);
 		});
 	}
 };
@@ -80,7 +82,7 @@ function createChart(data, label) {
 	var ricoverati_con_sintomi = datasetsParametro(data, "ricoverati_con_sintomi", "Ricoverati con sintomi", "#607D8B");
 	var terapia_intensiva = datasetsParametro(data, "terapia_intensiva", "Ricoverati in terapia intensiva", "#00838F");
 	var totale_ospedalizzati = datasetsParametro(data, "totale_ospedalizzati", "Totale degli ospedalizzati", "#FF8F00");
-	var nuovi_attualmente_positivi = datasetsParametro(data, "nuovi_attualmente_positivi", "Nuovi attualmente positivi", "#FF0000");
+	//var nuovi_attualmente_positivi = datasetsParametro(data, "nuovi_attualmente_positivi", "Nuovi attualmente positivi", "#FF0000");
 	var totale_attualmente_positivi = datasetsParametro(data, "totale_attualmente_positivi", "Totale attualmente positivi", "#00FF00");
 
 	// Disegna i grafici
@@ -97,6 +99,19 @@ function createChart(data, label) {
 
 	// Imposta il titolo della pagina
 	document.getElementById("titoloPagina").innerHTML = label;
+}
+
+
+function setBoxes(data) {
+	var totale_casi = datasetGetLastValue(data, "totale_casi");
+	var totale_attualmente_positivi = datasetGetLastValue(data, "totale_attualmente_positivi");
+	var deceduti = datasetGetLastValue(data, "deceduti");
+	var totale_ospedalizzati = datasetGetLastValue(data, "totale_ospedalizzati");
+
+	document.getElementById("box_totale_casi").innerHTML = totale_casi;
+	document.getElementById("box_totale_attualmente_positivi").innerHTML = totale_attualmente_positivi;
+	document.getElementById("box_deceduti").innerHTML = deceduti;
+	document.getElementById("box_totale_ospedalizzati").innerHTML = totale_ospedalizzati;
 }
 
 // Nasconde un grafico specifico
