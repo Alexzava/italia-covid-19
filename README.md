@@ -8,13 +8,10 @@ Il progetto è in fase di sviluppo, potrebbe subire modifiche giornaliere.
 
 ## TODO
 * Documentazione
-* Miglioramento del codice
 * Pagina dedicata ai dati provinciali
 * Sistema di comparazione dei dati
 * Esportazione dei grafici come immagini
 * Personalizzazione della pagina
-* Numeri verdi delle regioni
-* News e informazioni varie
 * Traduzione in altre lingue
 
 ## Credits

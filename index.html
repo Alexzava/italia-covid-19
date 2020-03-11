@@ -33,6 +33,7 @@
 	</head>
 	<body>
 		<header>
+			<!-- Menu di navigazione -->
 			<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212121;">
 				<a class="navbar-brand" href="/">ITALIA <span class="red">COVID-19</span></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +49,13 @@
 								Dati regionali
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown" id="listaRegioni">
-								<!--<a class="dropdown-item" href="#">Action</a>-->
+								<!-- Lista regioni -->
 							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#informazioniUtiliModal" data-toggle="modal">
+								Informazioni utili
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -57,16 +63,22 @@
 		</header>
 
 		<div class="container-fluid" id="mainContainer">
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
-				<strong>Il progetto è in fase di sviluppo</strong>. 
-				A breve verranno aggiunte nuove funzionalità
+
+			<!-- Alert box -->
+			<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alertBox">
+				<strong>$title$</strong>
+				$message$
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+
+			<!-- Titolo -->
 			<div class="col-md-12 text-center mb-30">
-				<h1 id="titoloPagina">...</h1>
+				<h1 id="titoloPagina"></h1>
 			</div>
+
+			<!-- Box -->
 			<div class="row mb-30">
 				<div class="col-md-3">
 					<div class="col-md-8 single-box">
@@ -93,6 +105,8 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Grafici -->
 			<div class="row mb-30">
 				<div class="col-md-6 mb-20">
 					<div class="col-md-12 icon-box">
@@ -167,6 +181,50 @@
 			</div>
 		</div>
 
+		<!-- Informazioni utili modal -->
+		<div class="modal fade" id="informazioniUtiliModal" tabindex="-1" role="dialog" aria-labelledby="informazioniUtiliModal" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Informazioni utili</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<ul>
+							<li>
+								<a target="_blank" class="special-link" href="http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioFaqNuovoCoronavirus.jsp?lingua=italiano&id=228">
+									Domande e risposte riguardo al nuovo corona virus
+								</a>
+							</li>
+							<li>
+								<a target="_blank" class="special-link" href="http://www.salute.gov.it/imgs/C_17_notizie_4186_0_file.pdf">
+									Modulo di autocertificazione
+								</a>
+							</li>
+							<li>
+								<a target="_blank" class="special-link" href="http://www.salute.gov.it/portale/nuovocoronavirus/homeNuovoCoronavirus.jsp">
+									Ministero della Salute
+								</a>
+							</li>
+							<li>
+								<a target="_blank" class="special-link" href="http://www.protezionecivile.gov.it/attivita-rischi/rischio-sanitario/emergenze/coronavirus">
+									Dipartimento per la Protezione Civile
+								</a>
+							</li>
+							<li>
+								<a target="_blank" class="special-link" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">
+									World Health Organization (Coronavirus disease  COVID - 19)
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
 		<footer class="container-fluid">
 			Sviluppato da <a href="https://alexzava.com" class="special-link" target="_blank">Alex Zava</a> |
 			<a href="https://github.com/pcm-dpc/COVID-19" class="special-link" target="_blank">Dataset</a> del 

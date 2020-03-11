@@ -58,3 +58,15 @@ footer {
 .mb-30 {
 	margin-bottom: 30px;
 }
+.modal-content {
+	background-color: #212121;
+}
+.close {
+	color: #FFF;
+}
+.close:hover {
+	color: #FFF;
+}
+.modal-header {
+	border-bottom: none;
+}

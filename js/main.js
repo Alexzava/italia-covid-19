@@ -6,32 +6,32 @@
 */
 
 // Regioni italiane
-var listaRegioni =[
-	"Abruzzo",
-	"Basilicata",
-	"Bolzano",
-	"Calabria",
-	"Campania",
-	"Emilia Romagna",
-	"Friuli Venezia Giulia",
-	"Lazio",
-	"Liguria",
-	"Lombardia",
-	"Marche",
-	"Molise",
-	"Piemonte",
-	"Puglia",
-	"Sardegna",
-	"Sicilia",
-	"Toscana",
-	"Trento",
-	"Umbria",
-	"Valle d'Aosta",
-	"Veneto"
-];
-
+// I numeri verdi fanno riferimento alla pagina dedicata del Ministero della Salute (salute.gov.it)
+var listaRegioni ={
+	"Abruzzo":{"numero_verde":"L’Aquila:118, Chieti-Lanciano-Vasto: 800 860 146, Pescara: 118, Teramo: 800 090 147"},
+	"Basilicata":{"numero_verde":"800 99 66 88 "},
+	"Bolzano":{"numero_verde":"800 751 751"},
+	"Calabria":{"numero_verde":"800 76 76 76"},
+	"Campania":{"numero_verde":"800 90 96 99 "},
+	"Emilia Romagna":{"numero_verde":"800 033 033"},
+	"Friuli Venezia Giulia":{"numero_verde":"800 500 300"},
+	"Lazio":{"numero_verde":"800 11 88 00"},
+	"Liguria":{"numero_verde":""},
+	"Lombardia":{"numero_verde":"800 89 45 45"},
+	"Marche":{"numero_verde":"800 93 66 77"},
+	"Molise":{"numero_verde":"0874 313000 e 0874 409000"},
+	"Piemonte":{"numero_verde":"800 19 20 20"},
+	"Puglia":{"numero_verde":"800 713 931"},
+	"Sardegna":{"numero_verde":"800 311 377"},
+	"Sicilia":{"numero_verde":"800 45 87 87"},
+	"Toscana":{"numero_verde":"800 55 60 60"},
+	"Trento":{"numero_verde":"800 867 388"},
+	"Umbria":{"numero_verde":"800 63 63 63"},
+	"Valle d'Aosta":{"numero_verde":"800 122 121"},
+	"Veneto":{"numero_verde":"800 462 340"},
+};
+var numero_nazionale = "1500";
 var isMobile = false;
-
 
 window.onload = function() {
 	// Controllo se mobile
@@ -40,11 +40,12 @@ window.onload = function() {
 
 	// Aggiunge le regioni al menu
 	var menuRegioni = document.getElementById("listaRegioni");
-	for(var i = 0; i < listaRegioni.length; i++) {
+	var regioni = Object.keys(listaRegioni);
+	for(var i = 0; i < regioni.length; i++) {
 		var link = document.createElement("a");
 		link.setAttribute("class", "dropdown-item");
-		link.setAttribute("href", "?regione="+listaRegioni[i]);
-		link.innerHTML = listaRegioni[i];
+		link.setAttribute("href", "?regione="+regioni[i]);
+		link.innerHTML = regioni[i];
 		menuRegioni.appendChild(link);
 	}
 
@@ -54,12 +55,22 @@ window.onload = function() {
 	var searchParams = new URLSearchParams(window.location.search);
 	if(searchParams.has("regione") && searchParams.get("regione")) {
 		initDatiRegionali(function() {
-			var datiRegione = filterRegione(datiRegionali, searchParams.get("regione"));
-			createChart(datiRegione, "Dati regione " + searchParams.get("regione"));
+			var regione = searchParams.get("regione");
+			// Aggiorna alert box
+			var numero = listaRegioni[regione]["numero_verde"];
+			if(numero === "")
+				numero = numero_nazionale;
+			setAlertBox("alertBox", "Numero dedicato all'emergenza COVID-19: ", numero);
+			// Crea grafici e box con gli ultimi dati
+			var datiRegione = filterRegione(datiRegionali, regione);
+			createChart(datiRegione, "Dati regione " + regione);
 			setBoxes(datiRegione);
 		});
 	} else {
 		initDatiNazionali(function() {
+			// Aggiorna alert box
+			setAlertBox("alertBox", "Numero nazionale dedicato all'emergenza COVID-19:", numero_nazionale);
+			// Crea grafici e box con gli ultimi dati
 			createChart(datiNazionali, "Dati nazionali");
 			setBoxes(datiNazionali);
 		});
@@ -101,8 +112,20 @@ function createChart(data, label) {
 	document.getElementById("titoloPagina").innerHTML = label;
 }
 
+// Aggiunge titolo e messaggio ad un alert box
+// boxID => string
+// title => string
+// message => string
+function setAlertBox(boxID, title, message) {
+	var alert = document.getElementById(boxID);
+	alert.innerHTML = alert.innerHTML.replace("$title$", title);
+	alert.innerHTML = alert.innerHTML.replace("$message$", message);
+}
 
+// Aggiorna gli utlimi dati nei box
+// data => dataset convertito (Vedi dataset.js => datasetConversion())
 function setBoxes(data) {
+	// Prende gli ultimi dati dal dataset
 	var totale_casi = datasetGetLastValue(data, "totale_casi");
 	var totale_attualmente_positivi = datasetGetLastValue(data, "totale_attualmente_positivi");
 	var deceduti = datasetGetLastValue(data, "deceduti");
