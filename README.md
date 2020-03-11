@@ -21,3 +21,5 @@ Il progetto è in fase di sviluppo, potrebbe subire modifiche giornaliere.
 Sviluppato da [Alex Zava](https://alexzava.com).
 
 [Datasets](https://github.com/pcm-dpc/COVID-19) del Dipartimento della Protezione Civile.
+
+Contatti: mail[at]alexzava[dot]com
