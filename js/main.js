@@ -65,6 +65,9 @@ window.onload = function() {
 			var datiRegione = filterRegione(datiRegionali, regione);
 			createChart(datiRegione, "Dati regione " + regione);
 			setBoxes(datiRegione);
+
+			// Nasconde il loader e mostra i grafici
+			hideLoader();
 		});
 	} else {
 		initDatiNazionali(function() {
@@ -73,6 +76,9 @@ window.onload = function() {
 			// Crea grafici e box con gli ultimi dati
 			createChart(datiNazionali, "Dati nazionali");
 			setBoxes(datiNazionali);
+
+			// Nasconde il loader e mostra i grafici
+			hideLoader();
 		});
 	}
 };
@@ -150,4 +156,10 @@ function zoomChart(e) {
 	} else {
 		parent.setAttribute("class", "col-md-6");
 	}
+}
+
+// Nasconde il loader e mostra i grafici
+function hideLoader() {
+	document.getElementById("loader").style = "display: none;";
+	document.getElementById("mainContainer").style = "display: block;";
 }
