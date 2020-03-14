@@ -10,7 +10,7 @@
 var listaRegioni ={
 	"Abruzzo":{"numero_verde":"L’Aquila:118, Chieti-Lanciano-Vasto: 800 860 146, Pescara: 118, Teramo: 800 090 147"},
 	"Basilicata":{"numero_verde":"800 99 66 88 "},
-	"Bolzano":{"numero_verde":"800 751 751"},
+	"P.A. Bolzano":{"numero_verde":"800 751 751"},
 	"Calabria":{"numero_verde":"800 76 76 76"},
 	"Campania":{"numero_verde":"800 90 96 99 "},
 	"Emilia Romagna":{"numero_verde":"800 033 033"},
@@ -25,7 +25,7 @@ var listaRegioni ={
 	"Sardegna":{"numero_verde":"800 311 377"},
 	"Sicilia":{"numero_verde":"800 45 87 87"},
 	"Toscana":{"numero_verde":"800 55 60 60"},
-	"Trento":{"numero_verde":"800 867 388"},
+	"P.A. Trento":{"numero_verde":"800 867 388"},
 	"Umbria":{"numero_verde":"800 63 63 63"},
 	"Valle d'Aosta":{"numero_verde":"800 122 121"},
 	"Veneto":{"numero_verde":"800 462 340"},
@@ -44,32 +44,43 @@ window.onload = function() {
 	for(var i = 0; i < regioni.length; i++) {
 		var link = document.createElement("a");
 		link.setAttribute("class", "dropdown-item");
-		link.setAttribute("href", "?regione="+regioni[i]);
+		link.setAttribute("href", "?q="+regioni[i]);
 		link.innerHTML = regioni[i];
 		menuRegioni.appendChild(link);
 	}
 
 	// Controlla i parametri url
-	// Se contiene il parametro "regione", visualizza i dati regionali
-	// Altrimenti visualizza i dati nazionali
+	// Se non sono presenti mostra i dati nazionali
 	var searchParams = new URLSearchParams(window.location.search);
-	if(searchParams.has("regione") && searchParams.get("regione")) {
+	if(searchParams.has("q") && searchParams.get("q")) {
 		initDatiRegionali(function() {
-			var regione = searchParams.get("regione");
-			// Aggiorna alert box
-			var numero = listaRegioni[regione]["numero_verde"];
-			if(numero === "")
-				numero = numero_nazionale;
-			setAlertBox("alertBox", "Numero dedicato all'emergenza COVID-19: ", numero);
-			// Crea grafici e box con gli ultimi dati
-			var datiRegione = filterRegione(datiRegionali, regione);
-			createChart(datiRegione, "Dati regione " + regione);
-			setBoxes(datiRegione);
-
+			var regione = searchParams.get("q");
+			if(regione === "riepilogo") {
+				// Mostra il repilogo dei dati regionali
+				var datiRecenti = getRegioniRecentData(datiRegionali);
+				createChart(datiRecenti, "Riepilogo dati regionali");
+				setAlertBox("alertBox", "Pagina in fase di sviluppo.", "La visione da telefono è sconsigliata.");
+				hideElement("boxRow");
+				hideElement("loader");
+				showElement("mainContainer");
+			} else {
+				// Mostra i dati delle singole regioni
+				// Aggiorna alert box
+				var numero = listaRegioni[regione]["numero_verde"];
+				if(numero === "")
+					numero = numero_nazionale;
+				setAlertBox("alertBox", "Numero dedicato all'emergenza COVID-19: ", numero);
+				// Crea grafici e box con gli ultimi dati
+				var datiRegione = filterRegione(datiRegionali, regione);
+				createChart(datiRegione, "Dati regione " + regione);
+				setBoxes(datiRegione);
+			}
 			// Nasconde il loader e mostra i grafici
-			hideLoader();
+			hideElement("loader");
+			showElement("mainContainer");
 		});
 	} else {
+		// Mostra i dati nazionali
 		initDatiNazionali(function() {
 			// Aggiorna alert box
 			setAlertBox("alertBox", "Numero nazionale dedicato all'emergenza COVID-19:", numero_nazionale);
@@ -78,7 +89,8 @@ window.onload = function() {
 			setBoxes(datiNazionali);
 
 			// Nasconde il loader e mostra i grafici
-			hideLoader();
+			hideElement("loader");
+			showElement("mainContainer");
 		});
 	}
 };
@@ -158,8 +170,12 @@ function zoomChart(e) {
 	}
 }
 
-// Nasconde il loader e mostra i grafici
-function hideLoader() {
-	document.getElementById("loader").style = "display: none;";
-	document.getElementById("mainContainer").style = "display: block;";
+// Nasconde un elemento
+function hideElement(e) {
+	document.getElementById(e).style = "display: none;";
+}
+
+// Mostra un elemento
+function showElement(e) {
+	document.getElementById(e).style = "display: block;";
 }
