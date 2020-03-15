@@ -73,19 +73,21 @@ function datasetConversion(data) {
 	var outData = [];
 	for(var i = 0; i < data.length; i++) {
 		var giorno = {};
-		giorno[data[i]["data"]] = {
-			"denominazione_regione": data[i]["denominazione_regione"],
-			"deceduti": data[i]["deceduti"],
-			"dimessi_guariti": data[i]["dimessi_guariti"],
-			"isolamento_domiciliare": data[i]["isolamento_domiciliare"],
-			"ricoverati_con_sintomi": data[i]["ricoverati_con_sintomi"],
-			"tamponi": data[i]["tamponi"],
-			"terapia_intensiva": data[i]["terapia_intensiva"],
-			"totale_attualmente_positivi": data[i]["totale_attualmente_positivi"],
-			"totale_casi": data[i]["totale_casi"],
-			"totale_ospedalizzati": data[i]["totale_ospedalizzati"],
-		};
-		outData.push(giorno);
+		if(data[i]["totale_casi"] !== undefined) {
+			giorno[data[i]["data"]] = {
+				"denominazione_regione": data[i]["denominazione_regione"],
+				"deceduti": data[i]["deceduti"],
+				"dimessi_guariti": data[i]["dimessi_guariti"],
+				"isolamento_domiciliare": data[i]["isolamento_domiciliare"],
+				"ricoverati_con_sintomi": data[i]["ricoverati_con_sintomi"],
+				"tamponi": data[i]["tamponi"],
+				"terapia_intensiva": data[i]["terapia_intensiva"],
+				"totale_attualmente_positivi": data[i]["totale_attualmente_positivi"],
+				"totale_casi": data[i]["totale_casi"],
+				"totale_ospedalizzati": data[i]["totale_ospedalizzati"],
+			};
+			outData.push(giorno);
+		}
 	}
 	return outData;
 }
@@ -136,46 +138,4 @@ function datasetGetLastValue(data, parametro) {
 	data = sliceDataset(data, data.length-1, data.length);
 	var giorno = Object.keys(data[0])[0];
 	return data[0][giorno][parametro];
-}
-
-// Disegna il grafico con il dataset fornito
-// chartID => id canvas
-// data => dataset converito (vedi datasetConversion() e datasetsParametro())
-function drawChart(chartID, data) {
-	var chart = new Chart(chartID, {
-		type: 'bar',
-		data: data,
-		options: {
-			legend: {
-				display: true,
-				labels: {
-					fontColor: '#FFFFFF',
-				},
-			},
-			scales: {
-				yAxes: [{
-					ticks: {
-						fontColor: '#FFFFFF',
-					},
-					gridLines: {
-						color: '#616161',
-					},
-				}],
-				xAxes: [{
-					ticks: {
-						fontColor: '#FFFFFF',
-					},
-					gridLines: {
-						color: '#616161',
-					},
-				}],
-			},
-			plugins: {
-	            datalabels: {
-	            	color: '#FFFFFF',
-	            	anchor: 'end',
-	            },
-	        },
-		}
-	});
 }

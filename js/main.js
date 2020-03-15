@@ -58,8 +58,13 @@ window.onload = function() {
 			if(regione === "riepilogo") {
 				// Mostra il repilogo dei dati regionali
 				var datiRecenti = getRegioniRecentData(datiRegionali);
-				createChart(datiRecenti, "Riepilogo dati regionali");
-				setAlertBox("alertBox", "Pagina in fase di sviluppo.", "La visione da telefono è sconsigliata.");
+				createChart(datiRecenti, "Dati regionali");
+				
+				if(isMobile)
+					setAlertBox("alertBox", "Attenzione: ", "Vista la grande quantità di dati è consigliato visualizzare la pagina da pc o tablet.");
+				else
+					setAlertBox("alertBox", "Numero nazionale dedicato all'emergenza COVID-19:", numero_nazionale);
+
 				hideElement("boxRow");
 				hideElement("loader");
 				showElement("mainContainer");
@@ -130,7 +135,49 @@ function createChart(data, label) {
 	document.getElementById("titoloPagina").innerHTML = label;
 }
 
-// Aggiunge titolo e messaggio ad un alert box
+// Disegna il grafico con il dataset fornito
+// chartID => id canvas
+// data => dataset converito (vedi datasetConversion() e datasetsParametro())
+function drawChart(chartID, data) {
+	var chart = new Chart(chartID, {
+		type: 'bar',
+		data: data,
+		options: {
+			legend: {
+				display: true,
+				labels: {
+					fontColor: '#FFFFFF',
+				},
+			},
+			scales: {
+				yAxes: [{
+					ticks: {
+						fontColor: '#FFFFFF',
+					},
+					gridLines: {
+						color: '#616161',
+					},
+				}],
+				xAxes: [{
+					ticks: {
+						fontColor: '#FFFFFF',
+					},
+					gridLines: {
+						color: '#616161',
+					},
+				}],
+			},
+			plugins: {
+	            datalabels: {
+	            	color: '#FFFFFF',
+	            	anchor: 'end',
+	            },
+	        },
+		}
+	});
+}
+
+// Aggiunge titolo e messaggio ad un alert box (vedi index.html come esempio)
 // boxID => string
 // title => string
 // message => string

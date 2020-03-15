@@ -9,8 +9,6 @@ Il progetto è in fase di sviluppo, potrebbe subire modifiche giornaliere.
 ## TODO
 * Documentazione
 * Pagina dedicata ai dati provinciali
-* Sistema di comparazione dei dati
-* Esportazione dei grafici come immagini
 * Personalizzazione della pagina
 * Traduzione in altre lingue
 
