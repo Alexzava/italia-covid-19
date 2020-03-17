@@ -35,8 +35,12 @@ var isMobile = false;
 
 window.onload = function() {
 	// Controllo se mobile
-	if(screen.width <= 900)
+	if(screen.width <= 900) {
 		isMobile = true;
+		// Nasconde la pagina "dati regionali" dal menu
+		// Non visualizzabile da mobile per via della grande quantità di dati da visualizzare
+		hideElement('datiRegionaliNav');
+	}
 
 	// Aggiunge le regioni al menu
 	var menuRegioni = document.getElementById("listaRegioni");
@@ -103,9 +107,9 @@ window.onload = function() {
 // Crea i grafici nella pagina principale
 // data => dataset convertito (Vedi dataset.js => datasetConversion())
 function createChart(data, label) {
-	// Se da mobile mostra gli ultimi 3 giorni
+	// Se da mobile mostra gli ultimi 4 giorni
 	if(isMobile)
-		data = sliceDataset(data, (data.length-3), data.length);
+		data = sliceDataset(data, (data.length-4), data.length);
 	
 	// Crea datasets per i grafici
 	var totale_casi = datasetsParametro(data, "totale_casi", "Casi totali", "#FF0000");
