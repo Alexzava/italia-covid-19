@@ -13,7 +13,7 @@ var listaRegioni ={
 	"P.A. Bolzano":{"numero_verde":"800 751 751"},
 	"Calabria":{"numero_verde":"800 76 76 76"},
 	"Campania":{"numero_verde":"800 90 96 99 "},
-	"Emilia Romagna":{"numero_verde":"800 033 033"},
+	"Emilia-Romagna":{"numero_verde":"800 033 033"},
 	"Friuli Venezia Giulia":{"numero_verde":"800 500 300"},
 	"Lazio":{"numero_verde":"800 11 88 00"},
 	"Liguria":{"numero_verde":""},
@@ -121,7 +121,7 @@ function createChart(data, label) {
 	var terapia_intensiva = datasetsParametro(data, "terapia_intensiva", "Ricoverati in terapia intensiva", "#00838F");
 	var totale_ospedalizzati = datasetsParametro(data, "totale_ospedalizzati", "Totale degli ospedalizzati", "#FF8F00");
 	//var nuovi_attualmente_positivi = datasetsParametro(data, "nuovi_attualmente_positivi", "Nuovi attualmente positivi", "#FF0000");
-	var totale_attualmente_positivi = datasetsParametro(data, "totale_attualmente_positivi", "Totale attualmente positivi", "#00FF00");
+	var totale_positivi = datasetsParametro(data, "totale_positivi", "Totale attualmente positivi", "#00FF00");
 
 	// Disegna i grafici
 	drawChart("totale_casi", totale_casi);
@@ -133,7 +133,7 @@ function createChart(data, label) {
 	drawChart("terapia_intensiva", terapia_intensiva);
 	drawChart("totale_ospedalizzati", totale_ospedalizzati);
 	//drawChart("nuovi_attualmente_positivi", nuovi_attualmente_positivi);
-	drawChart("totale_attualmente_positivi", totale_attualmente_positivi);
+	drawChart("totale_positivi", totale_positivi);
 
 	// Imposta il titolo della pagina
 	document.getElementById("titoloPagina").innerHTML = label;
@@ -196,12 +196,12 @@ function setAlertBox(boxID, title, message) {
 function setBoxes(data) {
 	// Prende gli ultimi dati dal dataset
 	var totale_casi = datasetGetLastValue(data, "totale_casi");
-	var totale_attualmente_positivi = datasetGetLastValue(data, "totale_attualmente_positivi");
+	var totale_positivi = datasetGetLastValue(data, "totale_positivi");
 	var deceduti = datasetGetLastValue(data, "deceduti");
 	var totale_ospedalizzati = datasetGetLastValue(data, "totale_ospedalizzati");
 
 	document.getElementById("box_totale_casi").innerHTML = totale_casi;
-	document.getElementById("box_totale_attualmente_positivi").innerHTML = totale_attualmente_positivi;
+	document.getElementById("box_totale_positivi").innerHTML = totale_positivi;
 	document.getElementById("box_deceduti").innerHTML = deceduti;
 	document.getElementById("box_totale_ospedalizzati").innerHTML = totale_ospedalizzati;
 }

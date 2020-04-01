@@ -43,6 +43,7 @@ function initDatiRegionali(callback) {
 	d3.csv(urlDatiRegionali)
 	.then(function(datiReg) {
 		datiRegionali = datasetConversion(datiReg);
+		console.log(getRegioni(datiRegionali));
 		if(callback && typeof callback === 'function')
 			callback();
 	});
@@ -82,7 +83,7 @@ function datasetConversion(data) {
 				"ricoverati_con_sintomi": data[i]["ricoverati_con_sintomi"],
 				"tamponi": data[i]["tamponi"],
 				"terapia_intensiva": data[i]["terapia_intensiva"],
-				"totale_attualmente_positivi": data[i]["totale_attualmente_positivi"],
+				"totale_positivi": data[i]["totale_positivi"],
 				"totale_casi": data[i]["totale_casi"],
 				"totale_ospedalizzati": data[i]["totale_ospedalizzati"],
 			};
