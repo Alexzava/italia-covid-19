@@ -63,22 +63,13 @@ window.onload = function() {
 				// Mostra il repilogo dei dati regionali
 				var datiRecenti = getRegioniRecentData(datiRegionali);
 				createChart(datiRecenti, "Dati regionali");
-				
-				if(isMobile)
-					setAlertBox("alertBox", "Attenzione: ", "Vista la grande quantità di dati è consigliato visualizzare la pagina da pc o tablet.");
-				else
-					setAlertBox("alertBox", "Numero nazionale dedicato all'emergenza COVID-19:", numero_nazionale);
 
 				hideElement("boxRow");
 				hideElement("loader");
 				showElement("mainContainer");
 			} else {
 				// Mostra i dati delle singole regioni
-				// Aggiorna alert box
-				var numero = listaRegioni[regione]["numero_verde"];
-				if(numero === "")
-					numero = numero_nazionale;
-				setAlertBox("alertBox", "Numero dedicato all'emergenza COVID-19: ", numero);
+
 				// Crea grafici e box con gli ultimi dati
 				var datiRegione = filterRegione(datiRegionali, regione);
 				createChart(datiRegione, "Dati regione " + regione);
@@ -91,8 +82,6 @@ window.onload = function() {
 	} else {
 		// Mostra i dati nazionali
 		initDatiNazionali(function() {
-			// Aggiorna alert box
-			setAlertBox("alertBox", "Numero nazionale dedicato all'emergenza COVID-19:", numero_nazionale);
 			// Crea grafici e box con gli ultimi dati
 			createChart(datiNazionali, "Dati nazionali");
 			setBoxes(datiNazionali);
@@ -107,9 +96,11 @@ window.onload = function() {
 // Crea i grafici nella pagina principale
 // data => dataset convertito (Vedi dataset.js => datasetConversion())
 function createChart(data, label) {
-	// Se da mobile mostra gli ultimi 4 giorni
+	// Se da mobile mostra gli ultimi 4 giorni, altrimenti mostra i dati degli ultimi 30 giorni
 	if(isMobile)
 		data = sliceDataset(data, (data.length-4), data.length);
+	else
+		data = sliceDataset(data, (data.length-30), data.length);
 	
 	// Crea datasets per i grafici
 	var totale_casi = datasetsParametro(data, "totale_casi", "Casi totali", "#FF0000");
