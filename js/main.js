@@ -62,7 +62,7 @@ window.onload = function() {
 			if(regione === "riepilogo") {
 				// Mostra il repilogo dei dati regionali
 				var datiRecenti = getRegioniRecentData(datiRegionali);
-				createChart(datiRecenti, "Dati regionali");
+				createChart(datiRecenti, "Dati regionali", true);
 
 				hideElement("boxRow");
 				hideElement("loader");
@@ -72,7 +72,7 @@ window.onload = function() {
 
 				// Crea grafici e box con gli ultimi dati
 				var datiRegione = filterRegione(datiRegionali, regione);
-				createChart(datiRegione, "Dati regione " + regione);
+				createChart(datiRegione, "Dati regione " + regione, false);
 				setBoxes(datiRegione);
 			}
 			// Nasconde il loader e mostra i grafici
@@ -83,7 +83,7 @@ window.onload = function() {
 		// Mostra i dati nazionali
 		initDatiNazionali(function() {
 			// Crea grafici e box con gli ultimi dati
-			createChart(datiNazionali, "Dati nazionali");
+			createChart(datiNazionali, "Dati nazionali", false);
 			setBoxes(datiNazionali);
 
 			// Nasconde il loader e mostra i grafici
@@ -95,11 +95,11 @@ window.onload = function() {
 
 // Crea i grafici nella pagina principale
 // data => dataset convertito (Vedi dataset.js => datasetConversion())
-function createChart(data, label) {
+function createChart(data, label, isRiepilogo) {
 	// Se da mobile mostra gli ultimi 4 giorni, altrimenti mostra i dati degli ultimi 30 giorni
 	if(isMobile)
 		data = sliceDataset(data, (data.length-4), data.length);
-	else
+	else if(!isRiepilogo)
 		data = sliceDataset(data, (data.length-30), data.length);
 	
 	// Crea datasets per i grafici
