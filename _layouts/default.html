@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% if page.title %}{{ page.title }} - {% endif %} {{ site.name }}</title>
+
+        <!-- META -->
+        {% include meta.html %}
+
+        <!-- CSS -->
+        {% include style.html %}
+
+        <!-- JS -->
+        {% include script.html %}
+    </head>
+    <body>
+        <!-- HEADER -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand text-uppercase" href="/">Italia <span class="red">COVID-19</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/andamento-nazionale">Andamento nazionale</a>
+                        </li>
+                        <li class="nav-item dropdown menu-dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Andamento per regione
+                            </a>
+                            <div class="dropdown-menu regioniDropdown" aria-labelledby="navbarDropdown">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- MAIN -->
+        <main class="row">
+            {{content}}
+        </main>
+
+        <footer>
+
+        </footer>
+
+        <div id="category" data-category="{{ page.category }}"></div>
+        <div class="preloader" id="preloader">
+            <strong>Cariamento...</strong>
+        </div>
+    </body>
+</html>

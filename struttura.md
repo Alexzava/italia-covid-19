@@ -1,0 +1,37 @@
+# Dati nazionali
+
+data
+ricoverati_con_sintomi
+terapia_intensiva
+totale_ospedalizzati
+isolamento_domiciliare
+totale_positivi
+variazione_totale_positivi
+nuovi_positivi
+dimessi_guariti
+deceduti
+casi_da_sospetto_diagnostico
+casi_da_screening
+totale_casi
+tamponi
+casi_testati
+
+# Dati regionali
+
+data
+codice_regione
+denominazione_regione
+ricoverati_con_sintomi
+terapia_intensiva
+totale_ospedalizzati
+isolamento_domiciliare
+totale_positivi
+variazione_totale_positivi
+nuovi_positivi
+dimessi_guariti
+deceduti
+casi_da_sospetto_diagnostico
+casi_da_screening
+totale_casi
+tamponi
+casi_testati
