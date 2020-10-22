@@ -43,9 +43,9 @@ function doDataset(category) {
 			// Inverto il dataset (Ordinato dal più recente)
 			dataset.reverse();
 			let newDataset = sliceDataset(dataset, 0, lastDays);
-			applyDataset(newDataset, {properties: prop});
+			setTable(newDataset, {properties: prop});
 
-			applyRecentPanel(newDataset);
+			setDashboardBoxes(newDataset);
 
 			// Inverto il dataset al suo stato iniziale (Ordine cronologico)
 			newDataset.reverse();
@@ -66,9 +66,9 @@ function doDataset(category) {
 			// Inverto il dataset (Ordinato dal più recente)
 			newDataset.reverse();
 			newDataset = sliceDataset(newDataset, 0, lastDays);
-			applyDataset(newDataset, {properties: prop});
+			setTable(newDataset, {properties: prop});
 
-			applyRecentPanel(newDataset);
+			setDashboardBoxes(newDataset);
 
 			// Inverto il dataset al suo stato iniziale (Ordine cronologico)
 			newDataset.reverse();
@@ -77,6 +77,7 @@ function doDataset(category) {
 	}
 }
 
+// Filtra il dataset per una regione specifica
 function filterDatasetRegione(codiceRegione, dataset) {
 	let regioneDataset = [];
 	for(const data of dataset) {
@@ -90,8 +91,8 @@ function filterDatasetRegione(codiceRegione, dataset) {
 // Applica i filtri selezionati nel form
 function filtersFormOnSubmit(event) {
 	event.preventDefault();
-	var filters = document.getElementsByClassName('filter-checkbox');
-	var params = [];
+	let filters = document.getElementsByClassName('filter-checkbox');
+	let params = [];
 	for(const checkbox of filters) {
 		if(checkbox.checked) {
 			params.push(checkbox.value);
@@ -106,37 +107,42 @@ function filtersFormOnSubmit(event) {
 }
 
 // Mostra i dati più recenti nei pannelli dashboard
-function applyRecentPanel(dataset) {
-	let panelAttualiPositivi = document.getElementById('panelAttualiPositivi');
-	let panelIncrementoPositivi = document.getElementById('panelIncrementoPositivi');
+function setDashboardBoxes(dataset) {
+	let boxTotaliPositivi = document.getElementById('boxTotaliPositivi');
+	let boxIncrementoPositivi = document.getElementById('boxIncrementoPositivi');
 
-	let panelGuariti = document.getElementById('panelGuariti');
-	let panelIncrementoGuariti = document.getElementById('panelIncrementoGuariti');
+	let boxGuariti = document.getElementById('boxGuariti');
+	let boxIncrementoGuariti = document.getElementById('boxIncrementoGuariti');
 
-	let panelDeceduti = document.getElementById('panelDeceduti');
-	let panelIncrementoDeceduti = document.getElementById('panelIncrementoDeceduti');
+	let boxDeceduti = document.getElementById('boxDeceduti');
+	let boxIncrementoDeceduti = document.getElementById('boxIncrementoDeceduti');
 
-	let panelOspedalizzati = document.getElementById('panelTotaliOspedalizzati');
-	let panelIncrementoOspedalizzati = document.getElementById('panelIncrementoOspedalizzati');
+	let boxTotaleCasi = document.getElementById('boxTotaleCasi');
+	let boxIncrementoTotaleCasi = document.getElementById('boxIncrementoTotaleCasi');
 
 	dataset = sliceDataset(dataset, 0, 2);
 
-	let incrementoPositivi = dataset[0].nuovi_positivi;
 	let incrementoGuariti = dataset[0].dimessi_guariti - dataset[1].dimessi_guariti;
 	let incrementoDeceduti = dataset[0].deceduti - dataset[1].deceduti;
-	let incrementoOspedalizzati = dataset[0].totale_ospedalizzati - dataset[1].totale_ospedalizzati;
 
-	panelAttualiPositivi.innerHTML = dataset[0].totale_positivi;
-	panelIncrementoPositivi.innerHTML = dataset[0].variazione_totale_positivi;
+	boxTotaliPositivi.innerHTML = dataset[0].totale_positivi;
+	boxIncrementoPositivi.innerHTML = dataset[0].variazione_totale_positivi;
 
-	panelGuariti.innerHTML = dataset[0].dimessi_guariti;
-	panelIncrementoGuariti.innerHTML = incrementoGuariti;
+	boxGuariti.innerHTML = dataset[0].dimessi_guariti;
+	boxIncrementoGuariti.innerHTML = incrementoGuariti;
 
-	panelDeceduti.innerHTML = dataset[0].deceduti;
-	panelIncrementoDeceduti.innerHTML = incrementoDeceduti;
+	boxDeceduti.innerHTML = dataset[0].deceduti;
+	boxIncrementoDeceduti.innerHTML = incrementoDeceduti;
 
-	panelOspedalizzati.innerHTML = dataset[0].totale_ospedalizzati;
-	panelIncrementoOspedalizzati.innerHTML = incrementoOspedalizzati;
+	boxTotaleCasi.innerHTML = dataset[0].totale_casi;
+	boxIncrementoTotaleCasi.innerHTML = dataset[0].nuovi_positivi;
+
+	// Grazie Gabri :)
+	// Il rapporto verrà aggiunto in un futuro aggiornamento al completamento della scheda "riepilogo"
+	//let boxRapportoTamponiPositivi = document.getElementById('boxRapportoTamponiPositivi');
+	/*let tamponiGiornalieri = dataset[0].tamponi - dataset[1].tamponi;
+	let rapportoTamponiPositivi = ((incrementoTotaleCasi/tamponiGiornalieri)*100).toFixed(1);
+	boxRapportoTamponiPositivi.innerHTML = rapportoTamponiPositivi + "%";*/
 }
 
 // Porziona il dataset
@@ -161,7 +167,7 @@ function sliceDataset(dataset, from, to) {
 
 // Disegna il grafico basato sul dataset
 function drawChart(chartID, dataset, filter) {
-	var ctx = document.getElementById(chartID).getContext('2d');
+	let ctx = document.getElementById(chartID).getContext('2d');
 
 	let labels = [];
 	let dataConf = [];
@@ -206,7 +212,7 @@ function drawChart(chartID, dataset, filter) {
 			}
 		}
 	}
-	var config = {
+	let config = {
 		type: 'line',
 		data: {
 			labels: labels,
@@ -267,11 +273,11 @@ function drawChart(chartID, dataset, filter) {
 			}
 		}
 	};
-	var chart = new Chart(ctx, config);
+	let chart = new Chart(ctx, config);
 }
 
 // Aggiunge i dati del dataset alla tabella
-function applyDataset(dataset, filter) {
+function setTable(dataset, filter) {
 	let tableHead = document.getElementById("tableHead");
 	let tableBody = document.getElementById("tableBody");
 
@@ -329,7 +335,7 @@ function randomHexColor() {
 	//const randomColor = Math.floor(Math.random()*16777215).toString(16);
 	//return "#"+randomColor
 
-	var colors = [
+	let colors = [
 		"ECCAB4",
 		"32a852",
 		"D2AF30",

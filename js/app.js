@@ -2,6 +2,7 @@ window.onload = init;
 
 function init() {
 	setRegioniNavbar();
+	$('[data-toggle="tooltip"]').tooltip();
 	let categoryNode = document.getElementById("category");
 	if(categoryNode) {
 		let category = categoryNode.getAttribute("data-category")

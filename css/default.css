@@ -1,12 +1,10 @@
 body {
-	width: 100vw;
-	height: 100vh;
 	background-color: #212121;
 	color: #FFF;
 }
 
-.border, .table td, .table th {
-	border: 1px solid rgba(255, 255, 255, 0.3) !important;
+main {
+	margin-bottom: 30px;
 }
 
 .row {
@@ -75,6 +73,48 @@ body {
 
 .icon-btn {
 	font-size: 1.6em;
+}
+
+.tableFixHead { 
+	overflow-y: auto;
+	height: 500px;
+	padding-bottom: 30px;
+}
+.tableFixHead thead th { 
+	position: sticky; 
+	top: 0;
+	background-color: #212121;
+}
+
+.max-width {
+	width: 100%;
+}
+
+.form-check-label a {
+	color: #FFF;
+	padding-left: 6px;
+}
+
+.form-check-label a:hover, .box a, .box a:hover {
+	color: #FFF;
+}
+
+.tooltip-inner, .tooltip-arrow {
+	background-color: #FFF;
+	color: #000;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow::before, .bs-tooltip-top .arrow::before {
+	border-top-color: #FFF;
+}
+
+input[type=checkbox], input[type=radio] {
+	transform: scale(1.5);
+}
+
+.navbar-brand h1 {
+	font-size: 1.2em;
+	margin-bottom: 0;
 }
 
 @media screen and (max-width: 795px) {
