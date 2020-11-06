@@ -42,6 +42,7 @@ function doDataset(category) {
 		getDataset(andamentoNazionaleUrl, (dataset) => {
 			// Inverto il dataset (Ordinato dal più recente)
 			dataset.reverse();
+			setDatasetLastUpdate(dataset);
 			let newDataset = sliceDataset(dataset, 0, lastDays);
 			setTable(newDataset, {properties: prop});
 
@@ -65,6 +66,7 @@ function doDataset(category) {
 
 			// Inverto il dataset (Ordinato dal più recente)
 			newDataset.reverse();
+			setDatasetLastUpdate(dataset);
 			newDataset = sliceDataset(newDataset, 0, lastDays);
 			setTable(newDataset, {properties: prop});
 
@@ -77,15 +79,13 @@ function doDataset(category) {
 	}
 }
 
-// Filtra il dataset per una regione specifica
-function filterDatasetRegione(codiceRegione, dataset) {
-	let regioneDataset = [];
-	for(const data of dataset) {
-		if(data.codice_regione == codiceRegione) {
-			regioneDataset.push(data);
-		}
+function setDatasetLastUpdate(dataset) {
+	let datasetLastUpdate = document.getElementById('datasetLastUpdate');
+	if(datasetLastUpdate && dataset[0].data) {
+		let timestamp = new Date(dataset[0].data);
+		let value = timestamp.getDate() + "/" + (timestamp.getMonth()+1) + "/" + timestamp.getFullYear();
+		datasetLastUpdate.innerHTML = value;
 	}
-	return regioneDataset;
 }
 
 // Applica i filtri selezionati nel form
@@ -100,14 +100,15 @@ function filtersFormOnSubmit(event) {
 	}
 	let daysInput = document.getElementById('days');
 	if(daysInput && daysInput.value.length > 0) {
-		window.location.href = baseUrl + "prop=" + params.join() + "&days=" + daysInput.value;
+		window.location.href = baseUrl + "prop=" + params.join() + "&days=" + daysInput.value + "#chart";
 	} else {
-		window.location.href = baseUrl + "prop=" + params.join();
+		window.location.href = baseUrl + "prop=" + params.join() + "#chart";
 	}
 }
 
 // Mostra i dati più recenti nei pannelli dashboard
 function setDashboardBoxes(dataset) {
+	// Dati box standard pagina dashboard
 	let boxTotaliPositivi = document.getElementById('boxTotaliPositivi');
 	let boxIncrementoPositivi = document.getElementById('boxIncrementoPositivi');
 
@@ -137,32 +138,33 @@ function setDashboardBoxes(dataset) {
 	boxTotaleCasi.innerHTML = dataset[0].totale_casi;
 	boxIncrementoTotaleCasi.innerHTML = dataset[0].nuovi_positivi;
 
+	// Dati box avanzato dashboard
+	let boxTotaleOspedalizzati = document.getElementById('boxTotaleOspedalizzati');
+	let boxIncrementoOspedalizzati = document.getElementById('boxIncrementoOspedalizzati');
+	let incrementoOspedalizzati = dataset[0].totale_ospedalizzati - dataset[1].totale_ospedalizzati;
+	boxTotaleOspedalizzati.innerHTML = dataset[0].totale_ospedalizzati
+	boxIncrementoOspedalizzati.innerHTML = incrementoOspedalizzati;
+
+	let boxIntensiva = document.getElementById('boxIntensiva');
+	let boxIncrementoIntensiva = document.getElementById('boxIncrementoIntensiva');
+	let incrementoIntensiva = dataset[0].terapia_intensiva - dataset[1].terapia_intensiva;
+	boxIntensiva.innerHTML = dataset[0].terapia_intensiva;
+	boxIncrementoIntensiva.innerHTML = incrementoIntensiva;
+
+	let boxIsolamentoDomiciliare = document.getElementById('boxIsolamentoDomiciliare');
+	let boxIncrementoIsolamentoDomiciliare = document.getElementById('boxIncrementoIsolamentoDomiciliare');
+	let incrementoIsolamento = dataset[0].isolamento_domiciliare - dataset[1].isolamento_domiciliare;
+	boxIsolamentoDomiciliare.innerHTML = dataset[0].isolamento_domiciliare;
+	boxIncrementoIsolamentoDomiciliare.innerHTML = incrementoIsolamento;
+
+
+	let boxTamponi = document.getElementById('boxTamponi');
+	let boxIncrementoTamponi = document.getElementById('boxIncrementoTamponi');
 	// Grazie Gabri :)
-	// Il rapporto verrà aggiunto in un futuro aggiornamento al completamento della scheda "riepilogo"
-	//let boxRapportoTamponiPositivi = document.getElementById('boxRapportoTamponiPositivi');
-	/*let tamponiGiornalieri = dataset[0].tamponi - dataset[1].tamponi;
-	let rapportoTamponiPositivi = ((incrementoTotaleCasi/tamponiGiornalieri)*100).toFixed(1);
-	boxRapportoTamponiPositivi.innerHTML = rapportoTamponiPositivi + "%";*/
-}
-
-// Porziona il dataset
-function sliceDataset(dataset, from, to) {
-	if(dataset.length == 0) {
-		console.log("Slice empty dataset");
-		return null;
-	}
-
-	if(to < dataset.length) {
-		if(to <= 0) {
-		dataset = dataset.slice(from, dataset.length);
-		} else {
-			dataset = dataset.slice(from, to);
-		}
-	} else {
-		return null;
-	}
-
-	return dataset;
+	let incrementoTamponi = dataset[0].tamponi - dataset[1].tamponi;
+	//let rapportoTamponiPositivi = ((dataset[0].nuovi_positivi/tamponiGiornalieri)*100).toFixed(1);
+	boxTamponi.innerHTML = dataset[0].tamponi;
+	boxIncrementoTamponi.innerHTML = incrementoTamponi;
 }
 
 // Disegna il grafico basato sul dataset
@@ -328,33 +330,4 @@ function setTable(dataset, filter) {
 			tableBody.append(row);
 		}
 	}
-}
-
-// Restituisce un colore casuale in HEX string
-function randomHexColor() {
-	//const randomColor = Math.floor(Math.random()*16777215).toString(16);
-	//return "#"+randomColor
-
-	let colors = [
-		"ECCAB4",
-		"32a852",
-		"D2AF30",
-		"c972ca",
-		"efcc09",
-		"7e07f2",
-		"4DA1F9",
-		"B3BDE3",
-		"EEF140",
-		"E55458",
-		"D529F8",
-		"88FBA5",
-		"DB0513",
-		"21FE97",
-		"2EEEEB",
-		"D39923",
-		"2361F2",
-		"EC59CE"
-	];
-
-	return "#" + colors[Math.floor(Math.random() * colors.length)];
 }

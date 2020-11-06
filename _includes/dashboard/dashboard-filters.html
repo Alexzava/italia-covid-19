@@ -1,0 +1,115 @@
+<a class="btn btn-light mb-2" data-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="filters">
+	<i class="fas fa-cogs"></i>
+</a>
+<div class="collapse pt-3" id="filters">
+	<h5>Seleziona i filtri</h5>
+	<form id="filtersForm" class="pl-2 pr-2">
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="ricoverati_con_sintomi">
+			<label class="form-check-label">
+				Ricoverati con sintomi
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ricoverati con sintomi"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="terapia_intensiva">
+			<label class="form-check-label">
+				Terapia intensiva
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ricoverati in terapia intensiva"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="totale_ospedalizzati">
+			<label class="form-check-label">
+				Totale ospedalizzati
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Totale ospedalizzati"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="isolamento_domiciliare">
+			<label class="form-check-label">
+				Isolamento domiciliare
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Persone in isolamento domiciliare"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="totale_positivi">
+			<label class="form-check-label">
+				Totale positivi
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Totale attualmente positivi (ospedalizzati + isolamento domiciliare)"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="variazione_totale_positivi">
+			<label class="form-check-label">
+				Variazione totale positivi
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Variazione del totale positivi (totale_positivi giorno corrente - totale_positivi giorno precedente)"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="nuovi_positivi">
+			<label class="form-check-label">
+				Nuovi positivi
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Nuovi attualmente positivi (totale_casi giorno corrente - totale_casi giorno precedente)"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="dimessi_guariti">
+			<label class="form-check-label">
+				Dimessi/Guariti
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Persone dimesse guarite"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="deceduti">
+			<label class="form-check-label">
+				Deceduti
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Persone decedute"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="casi_da_sospetto_diagnostico">
+			<label class="form-check-label">
+				Casi da sospetto diagnostico
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Casi positivi al tampone emersi da attività clinica"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="casi_da_screening">
+			<label class="form-check-label">
+				Casi da screening
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Casi positivi emersi da indagini e test, pianificati a livello nazionale o regionale"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="totale_casi">
+			<label class="form-check-label">
+				Totale casi
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Totale casi positivi"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="tamponi">
+			<label class="form-check-label">
+				Tamponi
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Totale tamponi"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<div class="form-check mr-3">
+			<input class="form-check-input filter-checkbox" type="checkbox" value="casi_testati">
+			<label class="form-check-label">
+				Casi testati
+				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Totale dei soggetti sottoposti al test"><i class="fas fa-question-circle"></i></a>
+			</label>
+		</div>
+		<br>
+		<div class="form-group col-sm-6 col-md-3 col-lg-2 pl-0 pr-0">
+			<label>Andamento degli ultimi <i>N</i> giorni</label>
+  			<input type="number" class="form-control" name="days" id="days" placeholder="Numero di giorni (esempio: 30)">
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-light" id="applyFiltersBtn">Applica filtri</button>
+		</div>
+	</form>
+</div>
+

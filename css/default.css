@@ -108,6 +108,10 @@ main {
 	border-top-color: #FFF;
 }
 
+.icon-advanced-box {
+	color: #FFF !important;
+}
+
 input[type=checkbox], input[type=radio] {
 	transform: scale(1.5);
 }
