@@ -40,6 +40,12 @@ function doDataset(category) {
 	if(category === "nazionale") {
 		baseUrl = "/andamento-nazionale/?";
 		getDataset(andamentoNazionaleUrl, (dataset) => {
+			// Titolo pagina dashboard
+			let dashboardTitle = document.getElementById('dashboardTitle');
+			if(dashboardTitle) {
+				dashboardTitle.appendChild(document.createTextNode("Andamento nazionale"));
+			}
+
 			// Inverto il dataset (Ordinato dal più recente)
 			dataset.reverse();
 			setDatasetLastUpdate(dataset);
@@ -61,7 +67,7 @@ function doDataset(category) {
 			// Titolo pagina dashboard
 			let dashboardTitle = document.getElementById('dashboardTitle');
 			if(dashboardTitle) {
-				dashboardTitle.innerHTML = "Andamento " + newDataset[0].denominazione_regione;
+				dashboardTitle.appendChild(document.createTextNode("Andamento " + newDataset[0].denominazione_regione));
 			}
 
 			// Inverto il dataset (Ordinato dal più recente)
@@ -84,7 +90,7 @@ function setDatasetLastUpdate(dataset) {
 	if(datasetLastUpdate && dataset[0].data) {
 		let timestamp = new Date(dataset[0].data);
 		let value = timestamp.getDate() + "/" + (timestamp.getMonth()+1) + "/" + timestamp.getFullYear();
-		datasetLastUpdate.innerHTML = value;
+		datasetLastUpdate.appendChild(document.createTextNode(value));
 	}
 }
 
@@ -126,36 +132,36 @@ function setDashboardBoxes(dataset) {
 	let incrementoGuariti = dataset[0].dimessi_guariti - dataset[1].dimessi_guariti;
 	let incrementoDeceduti = dataset[0].deceduti - dataset[1].deceduti;
 
-	boxTotaliPositivi.innerHTML = dataset[0].totale_positivi;
-	boxIncrementoPositivi.innerHTML = dataset[0].variazione_totale_positivi;
+	boxTotaliPositivi.appendChild(document.createTextNode(dataset[0].totale_positivi));
+	boxIncrementoPositivi.appendChild(document.createTextNode(dataset[0].variazione_totale_positivi));
 
-	boxGuariti.innerHTML = dataset[0].dimessi_guariti;
-	boxIncrementoGuariti.innerHTML = incrementoGuariti;
+	boxGuariti.appendChild(document.createTextNode(dataset[0].dimessi_guariti));
+	boxIncrementoGuariti.appendChild(document.createTextNode(incrementoGuariti));
 
-	boxDeceduti.innerHTML = dataset[0].deceduti;
-	boxIncrementoDeceduti.innerHTML = incrementoDeceduti;
+	boxDeceduti.appendChild(document.createTextNode(dataset[0].deceduti));
+	boxIncrementoDeceduti.appendChild(document.createTextNode(incrementoDeceduti));
 
-	boxTotaleCasi.innerHTML = dataset[0].totale_casi;
-	boxIncrementoTotaleCasi.innerHTML = dataset[0].nuovi_positivi;
+	boxTotaleCasi.appendChild(document.createTextNode(dataset[0].totale_casi));
+	boxIncrementoTotaleCasi.appendChild(document.createTextNode(dataset[0].nuovi_positivi));
 
 	// Dati box avanzato dashboard
 	let boxTotaleOspedalizzati = document.getElementById('boxTotaleOspedalizzati');
 	let boxIncrementoOspedalizzati = document.getElementById('boxIncrementoOspedalizzati');
 	let incrementoOspedalizzati = dataset[0].totale_ospedalizzati - dataset[1].totale_ospedalizzati;
-	boxTotaleOspedalizzati.innerHTML = dataset[0].totale_ospedalizzati
-	boxIncrementoOspedalizzati.innerHTML = incrementoOspedalizzati;
+	boxTotaleOspedalizzati.appendChild(document.createTextNode(dataset[0].totale_ospedalizzati));
+	boxIncrementoOspedalizzati.appendChild(document.createTextNode(incrementoOspedalizzati));
 
 	let boxIntensiva = document.getElementById('boxIntensiva');
 	let boxIncrementoIntensiva = document.getElementById('boxIncrementoIntensiva');
 	let incrementoIntensiva = dataset[0].terapia_intensiva - dataset[1].terapia_intensiva;
-	boxIntensiva.innerHTML = dataset[0].terapia_intensiva;
-	boxIncrementoIntensiva.innerHTML = incrementoIntensiva;
+	boxIntensiva.appendChild(document.createTextNode(dataset[0].terapia_intensiva));
+	boxIncrementoIntensiva.appendChild(document.createTextNode(incrementoIntensiva));
 
 	let boxIsolamentoDomiciliare = document.getElementById('boxIsolamentoDomiciliare');
 	let boxIncrementoIsolamentoDomiciliare = document.getElementById('boxIncrementoIsolamentoDomiciliare');
 	let incrementoIsolamento = dataset[0].isolamento_domiciliare - dataset[1].isolamento_domiciliare;
-	boxIsolamentoDomiciliare.innerHTML = dataset[0].isolamento_domiciliare;
-	boxIncrementoIsolamentoDomiciliare.innerHTML = incrementoIsolamento;
+	boxIsolamentoDomiciliare.appendChild(document.createTextNode(dataset[0].isolamento_domiciliare));
+	boxIncrementoIsolamentoDomiciliare.appendChild(document.createTextNode(incrementoIsolamento));
 
 
 	let boxTamponi = document.getElementById('boxTamponi');
@@ -163,8 +169,8 @@ function setDashboardBoxes(dataset) {
 	// Grazie Gabri :)
 	let incrementoTamponi = dataset[0].tamponi - dataset[1].tamponi;
 	//let rapportoTamponiPositivi = ((dataset[0].nuovi_positivi/tamponiGiornalieri)*100).toFixed(1);
-	boxTamponi.innerHTML = dataset[0].tamponi;
-	boxIncrementoTamponi.innerHTML = incrementoTamponi;
+	boxTamponi.appendChild(document.createTextNode(dataset[0].tamponi));
+	boxIncrementoTamponi.appendChild(document.createTextNode(incrementoTamponi));
 }
 
 // Disegna il grafico basato sul dataset
