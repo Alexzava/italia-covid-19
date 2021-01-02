@@ -17,13 +17,16 @@ function doDataset(category) {
 	}
 
 	// Legge i parametri passati via URL
+	if(category === "comparazione") {
+		prop = ["denominazione_regione", "data"];
+	}
 	const params = new URLSearchParams(window.location.search);
 	if(params.get('prop')) {
 		for(const p of params.get('prop').split(',')) {
 			prop.push(p);
 		}
 	} else {
-		prop.push("totale_positivi");
+		prop.push("totale_casi");
 		prop.push("dimessi_guariti");
 		prop.push("deceduti");
 	}
@@ -50,7 +53,7 @@ function doDataset(category) {
 			dataset.reverse();
 			setDatasetLastUpdate(dataset);
 			let newDataset = sliceDataset(dataset, 0, lastDays);
-			setTable(newDataset, {properties: prop});
+			setTable(newDataset, {properties: prop}, true);
 
 			setDashboardBoxes(newDataset);
 
@@ -74,13 +77,54 @@ function doDataset(category) {
 			newDataset.reverse();
 			setDatasetLastUpdate(dataset);
 			newDataset = sliceDataset(newDataset, 0, lastDays);
-			setTable(newDataset, {properties: prop});
+			setTable(newDataset, {properties: prop}, true);
 
 			setDashboardBoxes(newDataset);
 
 			// Inverto il dataset al suo stato iniziale (Ordine cronologico)
 			newDataset.reverse();
 			drawChart("chart", newDataset, {properties: prop});
+		});
+	} else if(category === "comparazione") {
+		baseUrl = "/comparazione/?";
+		getDataset(andamentoRegioniUrl, (dataset) => {
+			// Titolo pagina dashboard
+			let dashboardTitle = document.getElementById('dashboardTitle');
+			if(dashboardTitle) {
+				dashboardTitle.appendChild(document.createTextNode("Comparazione"));
+			}
+
+			// Inverto il dataset (Ordinato dal più recente)
+			dataset.reverse();
+
+			let newDataset = sliceDataset(dataset, 0, regioni.length);
+			let compDataset = sliceDataset(dataset, regioni.length, regioni.length + regioni.length);
+
+			if(newDataset.length == compDataset.length) {
+				for(let i = 0; i < newDataset.length; i++) {
+					if(newDataset[i].denominazione_regione == compDataset[i].denominazione_regione) {
+						for(const p of prop) {
+							if(p !== "denominazione_regione" && p !== "data") {
+								newDataset[i][p] = newDataset[i][p] - compDataset[i][p];
+							}
+						}
+					}
+				}
+			}
+
+			setDatasetLastUpdate(newDataset);
+
+			let boxSection = document.getElementById("boxSection");
+			if(boxSection) {
+				boxSection.style.display = "none";
+			}
+
+			let chartSection = document.getElementById("chartSection");
+			if(chartSection) {
+				chartSection.style.display = "none";
+			}
+ 
+			setTable(newDataset, {properties: prop}, false);
 		});
 	}
 }
@@ -285,7 +329,7 @@ function drawChart(chartID, dataset, filter) {
 }
 
 // Aggiunge i dati del dataset alla tabella
-function setTable(dataset, filter) {
+function setTable(dataset, filter, getIncremento) {
 	let tableHead = document.getElementById("tableHead");
 	let tableBody = document.getElementById("tableBody");
 
@@ -311,7 +355,8 @@ function setTable(dataset, filter) {
 
 	if(tableBody && dataset.length > 0) {
 		let row;
-		for(const data of dataset) {
+		for(let i = 0; i < dataset.length; i++) {
+			let data = dataset[i];
 			row = document.createElement('tr');
 			for(const prop in data) {
 				// Apply properties filter
@@ -328,8 +373,20 @@ function setTable(dataset, filter) {
 					value = timestamp.getDate() + "/" + (timestamp.getMonth()+1) + "/" + timestamp.getFullYear();
 				}
 
+				let incremento;
+				if(getIncremento && prop !== "variazione_totale_positivi" && prop !== "nuovi_positivi" && prop !== "data") {
+					if(i - 1 >= 0) {
+						incremento = dataset[i-1][prop] - value;
+					}
+				}
+
 				let td = document.createElement('td');
-				let text = document.createTextNode(value);
+				let text;
+				if(incremento) {
+					text = document.createTextNode(value + " (" + incremento + ")");
+				} else {
+					text = document.createTextNode(value);
+				}
 				td.append(text);
 				row.append(td);
 			}

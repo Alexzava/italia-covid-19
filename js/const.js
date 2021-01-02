@@ -1,6 +1,8 @@
 const andamentoNazionaleUrl = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json";
 const andamentoRegioniUrl = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json";
 
+const andamentoLatestRegioni = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni-latest.json";
+
 const regioni = [
 	{"denominazione_regione":"Abruzzo","codice_regione":13},
 	{"denominazione_regione":"Basilicata","codice_regione":17},

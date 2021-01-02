@@ -8,7 +8,7 @@ function init() {
 		let category = categoryNode.getAttribute("data-category")
 		if(category === "generic") {
 			hidePreloader();
-		} else if(category === "nazionale" || category === "regionale") {
+		} else if(category === "nazionale" || category === "regionale" || category === "comparazione") {
 			$.getScript("/js/andamento.js", function() {
 				doDataset(category);
 				hidePreloader();
