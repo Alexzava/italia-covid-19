@@ -8,12 +8,12 @@ function doDataset(category) {
 	}
 
 	let prop = ["data"];
-	let lastDays = -1;
+	let lastDays = 60; // -1
 	let codiceRegione = 3;
 
-	// Da mobile mostra gli ultimi 30 giorni di default
+	// Da mobile mostra gli ultimi 7 giorni di default
 	if(screen.width <= 900) {
-		lastDays = 30;
+		lastDays = 7;
 	}
 
 	// Legge i parametri passati via URL
@@ -26,9 +26,10 @@ function doDataset(category) {
 			prop.push(p);
 		}
 	} else {
-		prop.push("totale_casi");
+		/*prop.push("totale_casi");
 		prop.push("dimessi_guariti");
-		prop.push("deceduti");
+		prop.push("deceduti");*/
+		prop.push("totale_positivi");
 	}
 	if(params.get('days')) {
 		if(!isNaN(params.get('days'))) {
