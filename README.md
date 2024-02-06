@@ -2,7 +2,7 @@
 
 Rappresentazione dell'andamento nazionale e regionale del nuovo coronavirus SARS-CoV-2 / COVID-19.
 
-[italiacovid19.alexzava.com]([https://italiacovid19.it](https://italiacovid19.alexzava.com/))
+[italiacovid19.alexzava.com](https://italiacovid19.alexzava.com/)
 
 ## Credits
 Sviluppato da [Alex Zava](https://alexzava.com).
